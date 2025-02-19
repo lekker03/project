@@ -1,10 +1,11 @@
 <!DOCTYPE html>
 <html lang="en">
-    <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>index</title>
-        <style>
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>index</title>
+    <style>
         * {
             margin: 0;
             padding: 0;
@@ -55,7 +56,8 @@
         nav {
             display: flex;
             justify-content: space-between;
-            align-items: center; /* เพิ่มการจัดวางแนวตั้งตรงกลาง */
+            align-items: center;
+            /* เพิ่มการจัดวางแนวตั้งตรงกลาง */
             width: 100%;
             padding: 5px 50px;
             z-index: 2;
@@ -67,13 +69,14 @@
         }
 
         .logo {
-           
+
             display: flex;
             align-items: center;
         }
 
         .logo img {
-            height: 75px; /* ปรับขนาดตามที่ต้องการ */
+            height: 75px;
+            /* ปรับขนาดตามที่ต้องการ */
             width: auto;
             object-fit: contain;
         }
@@ -105,17 +108,17 @@
         }
 
         .dropbtn {
-        background: none;
-        border: none;
-        font-size: 16px;
-        font-weight: 500;
-        color: #fff;
-        padding: 8px 15px;
-        cursor: pointer;
-        transition: all 0.3s ease;
-        display: flex;
-        align-items: center;
-        gap: 5px;
+            background: none;
+            border: none;
+            font-size: 16px;
+            font-weight: 500;
+            color: #fff;
+            padding: 8px 15px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 5px;
         }
 
         .dropbtn:hover {
@@ -171,11 +174,13 @@
                 opacity: 0;
                 transform: translateY(-10px);
             }
+
             to {
                 opacity: 1;
                 transform: translateY(0);
             }
         }
+
         .header-info {
             position: absolute;
             top: 50%;
@@ -199,17 +204,82 @@
             font-size: 1rem;
         }
 
+        .responsive-section {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+            text-align: center;
+        }
+
+
+        div.gallery {
+            border: 1px solid #ccc;
+            margin: 15px;
+            border-radius: 4px;
+            overflow: hidden;
+            height: 300px;
+            display: flex;
+            flex-direction: column;
+        }
+
+
+        div.gallery:hover {
+            border: 1px solid #777;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        div.gallery img {
+            width: 100%;
+            height: 100%;
+            display: block;
+        }
+
+        div.desc {
+            padding: 15px;
+            text-align: center;
+        }
+
+        * {
+            box-sizing: border-box;
+        }
+
+        .responsive {
+            padding: 15px;
+            float: left;
+            width: calc(33.33333% - 30px);
+        }
+
+
+        @media only screen and (max-width: 700px) {
+            .responsive {
+                width: calc(50% - 30px);
+                margin: 6px 0;
+            }
+        }
+
+        @media only screen and (max-width: 500px) {
+            .responsive {
+                width: 100%;
+            }
+        }
+
+        .clearfix:after {
+            content: "";
+            display: table;
+            clear: both;
+        }
+
         section.about {
             display: flex;
             align-items: center;
             padding: 70px;
-            background: linear-gradient(to right, white, #f0f0f0);
+            background: linear-gradient(to right, white, #230cf3);
         }
 
         .about-info {
             width: 50%;
             padding-right: 70px;
-            
+
         }
 
         .about-info h1 {
@@ -240,13 +310,14 @@
             color: orange;
             font-size: 24px;
         }
+
         .team-section {
             width: 100%;
             height: 550px;
             padding: 3rem;
-            border-top: 2px solid orange;  /* เส้นขอบด้านบน */
+            border-top: 2px solid orange;
+            /* เส้นขอบด้านบน */
             border-bottom: 2px solid orange;
-            
         }
 
         .team-section h1 {
@@ -257,7 +328,7 @@
         }
 
         .team-container {
-            
+
             display: flex;
             justify-content: center;
             gap: 150px;
@@ -288,12 +359,13 @@
             font-size: 1rem;
             color: #333;
         }
+
         footer {
-        background: linear-gradient(to right, #060434, #32417e);
-        color: white;
-        text-align: center;
-        padding: 40px 0;
-        font-family: Arial, sans-serif;
+            background: linear-gradient(to right, #060434, #32417e);
+            color: white;
+            text-align: center;
+            padding: 40px 0;
+            font-family: Arial, sans-serif;
         }
 
         .footer-container {
@@ -336,13 +408,13 @@
         }
     </style>
     <script>
-        document.addEventListener('DOMContentLoaded', function() {
+        document.addEventListener('DOMContentLoaded', function () {
             const dropBtn = document.querySelector('.dropbtn');
             const dropdownContent = document.querySelector('.dropdown-content');
             let isOpen = false;
-        
+
             // Toggle dropdown when clicking the button
-            dropBtn.addEventListener('click', function(e) {
+            dropBtn.addEventListener('click', function (e) {
                 e.stopPropagation();
                 isOpen = !isOpen;
                 if (isOpen) {
@@ -351,139 +423,160 @@
                     dropdownContent.classList.remove('show');
                 }
             });
-        
+
             // Close dropdown when clicking outside
-            document.addEventListener('click', function(e) {
+            document.addEventListener('click', function (e) {
                 if (!dropBtn.contains(e.target) && !dropdownContent.contains(e.target)) {
                     dropdownContent.classList.remove('show');
                     isOpen = false;
                 }
             });
-        
+
             // Prevent dropdown from closing when clicking inside dropdown content
-            dropdownContent.addEventListener('click', function(e) {
+            dropdownContent.addEventListener('click', function (e) {
                 e.stopPropagation();
             });
         });
-        </script>
-    </head>
-    <body>
-        <header>
-            <div class="video-background">
-                <video id="background-video" autoplay muted loop>
-                    <source
-                        src="https://videos.pexels.com/video-files/3195351/3195351-uhd_2560_1440_25fps.mp4"
-                        type="video/mp4">
-                    Your browser does not support the video tag.
-                </video>
-                <div class="overlay"></div>
-            </div>
-            <nav>
-                <div class="logo">
-                    <img src="1.png" alt="Farm House Logo">
-                </div>
-                <ul class="menu">
-                    <li><a href="index.html">HOME</a></li>
-                    <li><a href="#">ABOUT US</a></li>
-                    <li><a href="#">TEAM</a></li>
-                    <li><a href="#">CONTACT</a></li>
-                    <div class="dropdown">
-                        <button class="dropbtn">MANAGE
-                            <i class="fa fa-caret-down"></i>
-                        </button>
+    </script>
+</head>
 
-                        <div class="dropdown-content">
-                            <a href="#">weather information</a>
-                            <a href="#">Plant Management</a>
-                            <a href="Fertilization.html">Irrigation&Fertilization</a>
-                        </div>
-                    </div>
-                </ul>
-            </nav>
-            <div class="header-info">
-                <h3>Welcome to</h3>
-                <h1>Agrinova Farm</h1>
-                <h5>Good food starts with great ingredients!</h5>
+<body>
+    <header>
+        <div class="video-background">
+            <video id="background-video" autoplay muted loop>
+                <source src="https://videos.pexels.com/video-files/3195351/3195351-uhd_2560_1440_25fps.mp4"
+                    type="video/mp4">
+                Your browser does not support the video tag.
+            </video>
+            <div class="overlay"></div>
+        </div>
+        <nav>
+            <div class="logo">
+                <img src="1.png" alt="Farm House Logo">
             </div>
-        </header>
+            <ul class="menu">
+                <li><a href="index.html">HOME</a></li>
+                <li><a href="#">ABOUT US</a></li>
+                <li><a href="#">TEAM</a></li>
+                <li><a href="#">CONTACT</a></li>
+                <div class="dropdown">
+                    <button class="dropbtn">MANAGE
+                        <i class="fa fa-caret-down"></i>
+                    </button>
 
-        <section class="about">
-            <div class="about-info">
-                <span class="icon">&#x1F4CD;</span>
-                <h1>ABOUT US</h1>
-                <p>Write a paragraph that talks about your company here. You can
-                    talk about your company’s background, history, mission,
-                    vision, or philosophy. Anything that will introduce your
-                    brand’s persona to your clients. This will help build a
-                    connection between you and them, that hopefully leads into a
-                    working relationship. Lorem ipsum dolor sit amet consectetur
-                    adipisicing elit. Deleniti facilis necessitatibus commodi
-                    voluptatem quo, tenetur adipisci, enim, voluptate saepe ut
-                    repellat corporis provident rem ratione.</p>
-            </div>
-            <div class="image-section">
-                <img
-                    src="https://images.pexels.com/photos/4022100/pexels-photo-4022100.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2">
-                <img
-                    src="https://images.pexels.com/photos/29115010/pexels-photo-29115010.png?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2"
-                    alt="Hydroponic Farming">
-                <img
-                    src="https://images.pexels.com/photos/1435904/pexels-photo-1435904.jpeg?auto=compress&cs=tinysrgb&w=600"
-                    alt="Fresh Vegetables" alt="Fresh Vegetables"
-                    alt="Greenhouse Farming">
-                <img
-                    src="https://images.pexels.com/photos/1719669/pexels-photo-1719669.jpeg?auto=compress&cs=tinysrgb&w=600"
-                    alt="Fresh Vegetables" alt="Fresh Vegetables"
-                    alt="Greenhouse Farming">
-            </div>
-        </section>
-
-        <section class="team-section">
-            <h1>OUR TEAM</h1>
-            <div class="team-container">
-                <div class="team-member">
-                    <img
-                        src="https://images.pexels.com/photos/2468490/pexels-photo-2468490.jpeg?auto=compress&cs=tinysrgb&w=600"
-                        alt="Team Member 1">
-                    <h3>Disaster relief</h3>
-                    <p>Through our physical and mental health programs,</p>
-                </div>
-                <div class="team-member">
-                    <img
-                        src="https://images.pexels.com/photos/1036623/pexels-photo-1036623.jpeg?auto=compress&cs=tinysrgb&w=600"
-                        alt="Team Member 2">
-                    <h3>Disaster relief</h3>
-                    <p>Through our physical and mental health programs,</p>
-                </div>
-            </div>
-        </section>
-
-        <footer>
-            <div class="footer-container">
-                <div class="footer-content">
-                    <h2>Contact Us</h2>
-                    <p>Email: info@agrinovafarm.com</p>
-                    <p>Phone: +1 234 567 890</p>
-                    <p>Address: 123 Taiburi Road, Nakhon Si Thammarat, Thailand</p>
-                </div>
-                <div class="footer-content">
-                    <h2>Follow Us</h2>
-                    <div class="social-icons">
-                        <a href="#"><img
-                                src="../image/face.png"
-                                alt="Facebook"></a>
-                        <a href="#"><img
-                                src="../image/instagram (1).png"
-                                alt="Instagram"></a>
-                        <a href="#"><img
-                                src="../image/line.png"
-                                alt="Line"></a>
+                    <div class="dropdown-content">
+                        <a href="#">weather information</a>
+                        <a href="#">Plant Management</a>
+                        <a href="Fertilization.html">Irrigation&Fertilization</a>
                     </div>
                 </div>
+            </ul>
+        </nav>
+        <div class="header-info">
+            <h3>Welcome to</h3>
+            <h1>Agrinova Farm</h1>
+            <h5>Good food starts with great ingredients!</h5>
+        </div>
+    </header>
+
+    <section class="responsive-section">
+        <h2>Responsive Image Gallery</h2>
+
+        <h4>Resize the browser window to see the effect.</h4>
+
+        <div class="responsive">
+            <div class="gallery">
+                <img src="https://images.unsplash.com/photo-1495107334309-fcf20504a5ab?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
+                    alt="Description">
+                <div class="desc">Add a description of the image here</div>
             </div>
-            <div class="footer-bottom">
-                <p>&copy; 2025 Agrinova Farm | All Rights Reserved</p>
+        </div>
+
+        <div class="responsive">
+            <div class="gallery">
+                <img src="https://images.unsplash.com/photo-1499529112087-3cb3b73cec95?q=80&w=1974&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
+                    alt="Description">
+                <div class="desc">Add a description of the image here</div>
             </div>
-        </footer>
-    </body>
+        </div>
+
+        <div class="responsive">
+            <div class="gallery">
+                <img src="https://images.unsplash.com/photo-1560493676-04071c5f467b?q=80&w=1974&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
+                    alt="Description">
+                <div class="desc">Add a description of the image here</div>
+            </div>
+        </div>
+
+        <div class="clearfix"></div>
+        </div>
+    </section>
+
+    <section class="about">
+        <div class="about-info">
+            <span class="icon">&#x1F4CD;</span>
+            <h1>ABOUT US</h1>
+            <p>Write a paragraph that talks about your company here. You can
+                talk about your company’s background, history, mission,
+                vision, or philosophy. Anything that will introduce your
+                brand’s persona to your clients. This will help build a
+                connection between you and them, that hopefully leads into a
+                working relationship. Lorem ipsum dolor sit amet consectetur
+                adipisicing elit. Deleniti facilis necessitatibus commodi
+                voluptatem quo, tenetur adipisci, enim, voluptate saepe ut
+                repellat corporis provident rem ratione.</p>
+        </div>
+        <div class="image-section">
+            <img
+                src="https://images.pexels.com/photos/4022100/pexels-photo-4022100.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2">
+            <img src="https://images.pexels.com/photos/29115010/pexels-photo-29115010.png?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2"
+                alt="Hydroponic Farming">
+            <img src="https://images.pexels.com/photos/1435904/pexels-photo-1435904.jpeg?auto=compress&cs=tinysrgb&w=600"
+                alt="Fresh Vegetables" alt="Fresh Vegetables" alt="Greenhouse Farming">
+            <img src="https://images.pexels.com/photos/1719669/pexels-photo-1719669.jpeg?auto=compress&cs=tinysrgb&w=600"
+                alt="Fresh Vegetables" alt="Fresh Vegetables" alt="Greenhouse Farming">
+        </div>
+    </section>
+
+    <section class="team-section">
+        <h1>OUR TEAM</h1>
+        <div class="team-container">
+            <div class="team-member">
+                <img src="https://images.pexels.com/photos/2468490/pexels-photo-2468490.jpeg?auto=compress&cs=tinysrgb&w=600"
+                    alt="Team Member 1">
+                <h3>Disaster relief</h3>
+                <p>Through our physical and mental health programs,</p>
+            </div>
+            <div class="team-member">
+                <img src="https://images.pexels.com/photos/1036623/pexels-photo-1036623.jpeg?auto=compress&cs=tinysrgb&w=600"
+                    alt="Team Member 2">
+                <h3>Disaster relief</h3>
+                <p>Through our physical and mental health programs,</p>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="footer-container">
+            <div class="footer-content">
+                <h2>Contact Us</h2>
+                <p>Email: info@agrinovafarm.com</p>
+                <p>Phone: +1 234 567 890</p>
+                <p>Address: 123 Taiburi Road, Nakhon Si Thammarat, Thailand</p>
+            </div>
+            <div class="footer-content">
+                <h2>Follow Us</h2>
+                <div class="social-icons">
+                    <a href="#"><img src="../image/face.png" alt="Facebook"></a>
+                    <a href="#"><img src="../image/instagram (1).png" alt="Instagram"></a>
+                    <a href="#"><img src="../image/line.png" alt="Line"></a>
+                </div>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2025 Agrinova Farm | All Rights Reserved</p>
+        </div>
+    </footer>
+</body>
+
 </html>

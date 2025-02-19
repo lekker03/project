@@ -1,0 +1,467 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>sensor</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            background: linear-gradient(to right, white, #f0f0f0);
+        }
+
+        header {
+            width: 100%;
+            height: 700px;
+            color: #fff;
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            overflow: hidden;
+        }
+
+        .image-background {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+        }
+
+        .image-background img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.2);
+            z-index: 1;
+        }
+
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            width: 100%;
+            padding: 5px 50px;
+            z-index: 2;
+            position: fixed;
+            top: 0;
+            left: 0;
+            background: rgba(6, 3, 86, 0.5);
+            backdrop-filter: blur(3px);
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+        }
+
+        .logo img {
+            height: 75px;
+            width: auto;
+            object-fit: contain;
+        }
+
+        .menu {
+            display: flex;
+            list-style: none;
+            align-items: center;
+            margin: 0;
+            padding: 0;
+        }
+
+        .menu li {
+            margin-left: 10px;
+            position: relative;
+        }
+
+        .menu li a {
+            color: #fff;
+            text-decoration: none;
+            font-size: 16px;
+            font-weight: 500;
+            padding: 8px 15px;
+            border-radius: 20px;
+            transition: all 0.3s ease;
+        }
+
+        .menu li a:hover {
+            background: rgba(255, 255, 255, 0.1);
+            color: #f7941d;
+        }
+
+        .dropbtn {
+            background: none;
+            border: none;
+            font-size: 16px;
+            font-weight: 500;
+            color: #fff;
+            padding: 8px 15px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+
+        .dropbtn:hover {
+            color: #f7941d;
+        }
+
+        .dropdown {
+            position: relative;
+        }
+
+        .dropdown-content {
+            margin-top: 10px;
+            display: none;
+            position: absolute;
+            right: 0;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            min-width: 200px;
+            border-radius: 10px;
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+            z-index: 1;
+        }
+
+        .dropdown-content a {
+            color: #333 !important;
+            padding: 12px 20px !important;
+            text-decoration: none;
+            display: block;
+            transition: all 0.3s ease;
+        }
+
+        .dropdown-content a:first-child {
+            border-radius: 10px 10px 0 0;
+        }
+
+        .dropdown-content a:last-child {
+            border-radius: 0 0 10px 10px;
+        }
+
+        .dropdown-content a:hover {
+            background: #f7941d !important;
+            color: #fff !important;
+        }
+
+        /* Add this class for showing dropdown */
+        .show {
+            display: block !important;
+            animation: fadeIn 0.3s ease;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(-10px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+
+        .title {
+            font-size: 48px;
+            font-weight: bold;
+            margin-bottom: 40px;
+            text-align: center;
+        }
+
+        .weather-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 60px;
+            width: 100%;
+            max-width: 1200px;
+        }
+
+        .weather-box {
+            background: rgba(255, 255, 255, 0.85);
+            border-radius: 15px;
+            padding: 20px;
+            text-align: center;
+            color: #333;
+            text-shadow: none;
+        }
+
+        .weather-box .label {
+            font-size: 18px;
+            margin-bottom: 10px;
+            font-weight: bold;
+        }
+
+        .weather-box .value {
+            font-size: 36px;
+            display: grid;
+            grid-template-columns: auto 1fr;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .weather-icon {
+            width: 40px;
+            height: 40px;
+            margin-right: 10px;
+        }
+
+        .station-info {
+            background: rgba(255, 255, 255, 0.85);
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            margin-top: 20px;
+        }
+
+        .info-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 55px;
+            width: 100%;
+            max-width: 1200px
+        }
+
+        .info-item {
+            padding: 10px;
+        }
+
+        .info-label {
+            color: #666;
+            margin-bottom: 5px;
+            font-size: 14px;
+        }
+
+        .info-value {
+            color: #333;
+            font-weight: bold;
+        }
+
+        
+        
+        .image-section img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        footer {
+            background: linear-gradient(to right, #060434, #32417e);
+            color: white;
+            text-align: center;
+            padding: 40px 0;
+            font-family: Arial, sans-serif;
+        }
+
+        .footer-container {
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+            flex-wrap: wrap;
+            padding: 20px;
+        }
+
+        .footer-content {
+            margin: 10px;
+        }
+
+        .footer-content h2 {
+            font-size: 20px;
+            margin-bottom: 10px;
+        }
+
+        .footer-content p {
+            font-size: 16px;
+            margin-bottom: 5px;
+        }
+
+        .social-icons a img {
+            width: 30px;
+            margin: 0 10px;
+            transition: transform 0.3s ease;
+        }
+
+        .social-icons a:hover img {
+            transform: scale(1.2);
+        }
+
+        .footer-bottom {
+            margin-top: 20px;
+            font-size: 14px;
+            border-top: 1px solid rgba(176, 175, 175, 0.81);
+            padding-top: 20px;
+        }
+    </style>
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const dropBtn = document.querySelector('.dropbtn');
+            const dropdownContent = document.querySelector('.dropdown-content');
+            let isOpen = false;
+
+            // Toggle dropdown when clicking the button
+            dropBtn.addEventListener('click', function (e) {
+                e.stopPropagation();
+                isOpen = !isOpen;
+                if (isOpen) {
+                    dropdownContent.classList.add('show');
+                } else {
+                    dropdownContent.classList.remove('show');
+                }
+            });
+
+            // Close dropdown when clicking outside
+            document.addEventListener('click', function (e) {
+                if (!dropBtn.contains(e.target) && !dropdownContent.contains(e.target)) {
+                    dropdownContent.classList.remove('show');
+                    isOpen = false;
+                }
+            });
+
+            // Prevent dropdown from closing when clicking inside dropdown content
+            dropdownContent.addEventListener('click', function (e) {
+                e.stopPropagation();
+            });
+        });
+    </script>
+
+</head>
+
+<body>
+    <header>
+        <div class="image-background">
+            <img src="https://images.pexels.com/photos/974314/pexels-photo-974314.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2"
+                alt="Background ">
+            <div class="overlay"></div>
+        </div>
+        <nav>
+            <div class="logo">
+                <img src="1.png" alt="Farm House Logo">
+            </div>
+            <ul class="menu">
+                <li><a href="index.html">HOME</a></li>
+                <li><a href="#">ABOUT US</a></li>
+                <li><a href="#">TEAM</a></li>
+                <li><a href="#">CONTACT</a></li>
+                <div class="dropdown">
+                    <button class="dropbtn">MANAGE</button>
+                    <div class="dropdown-content">
+                        <a href="#">Weather Information</a>
+                        <a href="#">Plant Management</a>
+                        <a href="#">Irrigation & Fertilization</a>
+                    </div>
+                </div>
+            </ul>
+        </nav>
+
+        <div class="title">
+            </h1> Wearter</h1>
+        </div>
+        <div class="weather-grid">
+            <div class="weather-box">
+                <div class="label">อุณหภูมิ</div>
+                <div class="value">
+                    <img src="https://cdn-icons-png.flaticon.com/512/1779/1779807.png" class="weather-icon"
+                        alt="อุณหภูมิ">
+                    26°
+                </div>
+            </div>
+
+            <div class="weather-box">
+                <div class="label">น้ำฝน</div>
+                <div class="value">
+                    <img src="https://cdn-icons-png.flaticon.com/512/1779/1779801.png" class="weather-icon" alt="น้ำฝน">
+                    75%
+                </div>
+            </div>
+
+            <div class="weather-box">
+                <div class="label">ความชื้น</div>
+                <div class="value">
+                    <img src="https://cdn-icons-png.flaticon.com/512/1779/1779788.png" class="weather-icon"
+                        alt="ความชื้น">
+                    78%
+                </div>
+            </div>
+
+            <div class="weather-box">
+                <div class="label">ความเร็วลม</div>
+                <div class="value">
+                    <img src="https://cdn-icons-png.flaticon.com/512/1779/1779823.png" class="weather-icon"
+                        alt="ความเร็วลม">
+                    15.2 km/h
+                </div>
+            </div>
+        </div>
+        <div class="station-info">
+            <div class="info-grid">
+                <div class="info-item">
+                    <div class="info-label">Record ID</div>
+                    <div class="info-value">1001</div>
+                </div>
+                <div class="info-item">
+                    <div class="info-label">สถานที่</div>
+                    <div class="info-value">Farm Station 1</div>
+                </div>
+                <div class="info-item">
+                    <div class="info-label">อัพเดทล่าสุด</div>
+                    <div class="info-value">13/02/2025 15:30:45</div>
+                </div>
+                <div class="info-item">
+                    <div class="info-label">อัพเดทล่าสุด</div>
+                    <div class="info-value">13/02/2025 15:30:45</div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+
+    <section class="image-section">
+        <img src="https://i.pinimg.com/736x/5d/63/22/5d6322cfd56e12d3cfd1dc46fdc827ac.jpg" alt="Farm Image">
+    </section>
+
+
+    <footer>
+        <div class="footer-container">
+            <div class="footer-content">
+                <h2>Contact Us</h2>
+                <p>Email: info@agrinovafarm.com</p>
+                <p>Phone: +1 234 567 890</p>
+                <p>Address: 123 Taiburi Road, Nakhon Si Thammarat, Thailand</p>
+            </div>
+            <div class="footer-content">
+                <h2>Follow Us</h2>
+                <div class="social-icons">
+                    <a href="#"><img src="../image/face.png" alt="Facebook"></a>
+                    <a href="#"><img src="../image/instagram (1).png" alt="Instagram"></a>
+                    <a href="#"><img src="../image/line.png" alt="Line"></a>
+                </div>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2025 Agrinova Farm | All Rights Reserved</p>
+        </div>
+    </footer>
+
+</body>
+
+</html>
